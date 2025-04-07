@@ -1,0 +1,180 @@
+<%- include("partials/header.ejs") %>
+  <%- include("partials/search-form.ejs") %>
+    <% if (locals.data) { %>
+
+      <div class="parent">
+        <div class="backdrop">
+          <img src="https://image.tmdb.org/t/p/original<%= data.backdrop_path %>" alt="<%=data.title%>" />
+        </div>
+
+        <div class="info-container">
+          <div class="card">
+            <div class="card-img">
+              <img src="<%= data.poster_path 
+                      ? " https://image.tmdb.org/t/p/w500" + data.poster_path
+                : "../public/images/dummy-image-portrait.jpg" %>" alt="<%= data.title %>" />
+            </div>
+          </div>
+
+          <div class="details bodytext">
+            <p class="title">
+              <%= data.title %> (<%= data.release_date.split("-")[0] %>)
+            </p>
+            <p class="tagline">
+              <%= data.tagline %>
+            </p>
+
+            <div class="little-details">
+              <p class="rating icon">
+                <i class="fa-solid fa-star"></i>
+                <%= data.vote_average.toFixed(1) %>
+              </p>
+              <p class="runtime">
+                <i class="fa-solid fa-clock"></i>
+                <%= data.runtime %> min
+              </p>
+
+              <div class="details-genres">
+                <% data.genres.forEach(element=> { %>
+                  <p class="genre"># <%= element.name %>
+                  </p>
+                  <% }) %>
+              </div>
+            </div>
+
+
+            <h5 class="title2">Description</h5>
+            <p id="description">
+              <%= data.overview %>
+            </p>
+
+            <!-- TODO: FIX THIS -->
+            <% if (data.credits && data.credits.length> 0) { %>
+              <h5 class="title2">Directed by</h5>
+              <p>
+                <%= data.credits.filter(person=> person.job === "Director").length > 0
+                  ? data.credits
+                  .filter(person => person.job === "Director")
+                  .map(person => person.name)
+                  .join(', ')
+                  : "Unknown" %>
+                  <%console.log(data.credits); %>
+              </p>
+              <% } %>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="second-section">
+        <div class="media">
+          <!-- VIDEOS SECTION -->
+          <% if (locals.videos) { %>
+            <div class="video-container scrollable-container">
+              <h3 class="title"><i class="fa-brands fa-youtube"></i> Videos (<%= videos.length %>)</h3>
+              <div class="video-wrapper">
+                <% videos.forEach(video=> { %>
+                  <% if (video.site==="YouTube" ) { %>
+                    <img class="clickable-video" src="https://img.youtube.com/vi/<%= video.key %>/maxresdefault.jpg"
+                      data-video-id="<%= video.key %>" alt="Video Thumbnail">
+                    <% } %>
+                      <% }) %>
+              </div>
+            </div>
+            <% } %>
+
+
+              <!-- IMAGES SECTION -->
+              <% if (locals.images.length> 0) { %>
+                <div class="images-container scrollable-container">
+                  <h3 class="title"><i class="fa-regular fa-images"></i> Images (<%= images.length %>)</h3>
+                  <div class="images-wrapper">
+                    <% images.forEach(image=> { %>
+                      <img class="clickable-image" src="https://image.tmdb.org/t/p/original<%= image.file_path %>"
+                        alt="">
+                      <% }) %>
+                  </div>
+                </div>
+                <% } %>
+        </div>
+
+        <!-- EXTRA INFO SECTION -->
+        <div class="about scrollable-container">
+          <h3 class="title">
+            <i class="fa-solid fa-circle-info"></i>
+            About
+          </h3>
+
+          <div class="about-info bodytext">
+
+            <h5 class="title2">Original Name:</h5>
+            <p>
+              <%= data.original_title %>
+            </p>
+            <h5 class="title2">Original Language:</h5>
+            <p>
+              <%= new Intl.DisplayNames(['en'], { type: 'language' }).of(data.original_language) %>
+            </p>
+            <h5 class="title2">Theatrical Release:</h5>
+            <p>
+              <%=new Date(data.release_date+'Z').toLocaleDateString("en-US", {day: 'numeric' , year: 'numeric' ,
+                month: 'short' }) %>
+            </p>
+
+            <h5 class="title2">Keywords</h5>
+            <div class="keywords-container">
+              <% if (locals.keywords) { %>
+                <% keywords.forEach(word=> { %>
+                  <p class="keyword">
+                    <%= word.name %>
+                  </p>
+                  <% }) %>
+                    <% } %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup Modal -->
+      <div id="popup-modal" class="hidden">
+        <div class="modal-content">
+          <span id="close-modal"><i class="fa-solid fa-circle-xmark"></i></span>
+          <div id="popup-content"></div>
+        </div>
+      </div>
+
+
+      <!-- RECOMENDED SECTION -->
+      <h2 class="title heading">Recommended</h4>
+        <div class="similar">
+          <% similar.forEach(element=> { %>
+            <div class="movie-container">
+              <a href="/details/<%= element.media_type %>/<%= element.id %>">
+                <div class="card">
+                  <div class="card-img">
+                    <img src="<%= element.poster_path 
+                      ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg"
+                      %>"
+                    alt="<%= element.media_type===" tv" ? element.name : element.title %>" />
+                  </div>
+
+                </div>
+
+                <div class="movie-info bodytext">
+                  <p class="rating icon">
+                    <i class="fa-solid fa-star"></i>
+                    <%= element.vote_average.toFixed(1) %>
+                  </p>
+                  <p class="icon"><i class="fa-solid fa-<%= element.media_type === " tv" ? "tv" : "film" %>"></i></p>
+                  <h3 class="movie-title">
+                    <%= element.media_type==="tv" ? element.name : element.title %>
+                      (<%= element.media_type==="tv" ? element.first_air_date.split("-")[0] :
+                        element.release_date.split("-")[0] %>)
+                  </h3>
+                </div>
+              </a>
+            </div>
+            <% }) %>
+        </div>
+        <% } %> <%- include("partials/footer.ejs") %>
