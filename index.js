@@ -146,6 +146,7 @@ async function searchDetailsAPI(path, params, media_type) {
             headers: api_headers
         })
         const data = api_result.data
+        // console.log(data.credits.cast);
 
         if (media_type === "tv") {
             const general_info = {
@@ -153,8 +154,12 @@ async function searchDetailsAPI(path, params, media_type) {
                 poster_path: data.poster_path,
                 name: data.name,
                 created_by: data.created_by.map(person => person.name),
-                first_air_date: data.first_air_date.split("-")[0], // Year only
-                last_air_date: data.last_air_date.split("-")[0], // Year only
+                first_air_date: data.first_air_date
+                    ? data.first_air_date.split("-")[0]
+                    : 'NA', // Year only
+                last_air_date: data.last_air_date
+                    ? data.last_air_date.split("-")[0]
+                    : "NA", // Year only
                 genres: data.genres.map(item => item.name),
                 networks: data.networks.map(item => item.name),
                 episodes: data.number_of_episodes,
@@ -177,8 +182,13 @@ async function searchDetailsAPI(path, params, media_type) {
                 status: data.status,
                 tagline: data.tagline,
                 vote_average: data.vote_average.toFixed(1),
-                content_rating: data.content_ratings.results?.filter(item => item.iso_3166_1 === "US")[0].rating || null
+                content_rating: (
+                    data.content_ratings?.results?.find(item => item.iso_3166_1 === "US") ||
+                    data.content_ratings?.results?.[0] ||
+                    {}
+                ).rating || null
             }
+
 
             const recs = data.recommendations.results.map(item => ({
                 poster_path: item.poster_path,
@@ -221,6 +231,7 @@ async function searchDetailsAPI(path, params, media_type) {
                 vote_average: data.vote_average.toFixed(1),
                 popularity: data.popularity,
                 og_lang: new Intl.DisplayNames(['en'], { type: 'language' }).of(data.original_language),
+                cast: data.credits.cast?.map(person => person.name)
 
             }
 
@@ -249,7 +260,7 @@ async function searchDetailsAPI(path, params, media_type) {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send(error.message);
+        throw error
 
     }
 }

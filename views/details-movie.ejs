@@ -11,8 +11,8 @@
           <div class="card-img">
             <img src="<%= info.poster_path 
                       ? " https://image.tmdb.org/t/p/w500" + info.poster_path
-                      : "../public/images/dummy-image-portrait.jpg" %>" 
-                  alt="<%= info.title %>" />
+              : "../public/images/dummy-image-portrait.jpg" %>"
+            alt="<%= info.title %>" />
           </div>
         </div>
 
@@ -44,7 +44,7 @@
 
           <div class="description">
             <h5 class="title2">Description</h5>
-            <p id="description">
+            <p id="description" class="text-1rem">
               <%= info.overview %>
             </p>
           </div>
@@ -53,7 +53,7 @@
           <div class="directors">
             <% if (directors && directors.length> 0) { %>
               <h5 class="title2">Directed by</h5>
-              <p>
+              <p class="text-1rem">
                 <% if (directors.length> 1) { %>
                   <%= directors.join(", ") %>
                 <% } else { %>
@@ -62,8 +62,21 @@
               </p>
             <% } %>
           </div>
-
+          
+          <div class=" cast">
+                    <% if (info.cast && info.cast.length> 0) { %>
+                      <h5 class="title2">Cast</h5>
+                      <p class="text-1rem">
+                        <% if (info.cast.length> 1) { %>
+                          <%= info.cast.slice(0, 6).join(", ") + " ..." %>
+                            <% } else { %>
+                              <%= info.cast[0] %>
+                                <% } %>
+                      </p>
+                      <% } %>
           </div>
+
+        </div>
       </div>
     </div>
 
@@ -76,8 +89,7 @@
             <div class="video-wrapper">
               <% videos.forEach(video=> { %>
                 <% if (video.site==="YouTube" ) { %>
-                  <img class="clickable-video"
-                    src="https://img.youtube.com/vi/<%= video.key %>/maxresdefault.jpg"
+                  <img class="clickable-video" src="https://img.youtube.com/vi/<%= video.key %>/maxresdefault.jpg"
                     data-video-id="<%= video.key %>" alt="Video Thumbnail">
                   <% } %>
                     <% }) %>
@@ -86,18 +98,17 @@
           <% } %>
 
 
-      <!-- IMAGES SECTION -->
-      <% if (images.length> 0) { %>
-        <div class="images-container scrollable-container">
-          <h3 class="title"><i class="fa-regular fa-images"></i> Images (<%= images.length %>)</h3>
-          <div class="images-wrapper">
-            <% images.forEach(image=> { %>
-              <img class="clickable-image" src="https://image.tmdb.org/t/p/original<%= image %>"
-                alt="">
-              <% }) %>
-          </div>
-        </div>
-      <% } %>
+            <!-- IMAGES SECTION -->
+            <% if (images.length> 0) { %>
+              <div class="images-container scrollable-container">
+                <h3 class="title"><i class="fa-regular fa-images"></i> Images (<%= images.length %>)</h3>
+                <div class="images-wrapper">
+                  <% images.forEach(image=> { %>
+                    <img class="clickable-image" src="https://image.tmdb.org/t/p/original<%= image %>" alt="">
+                    <% }) %>
+                </div>
+              </div>
+              <% } %>
       </div>
 
       <!-- EXTRA INFO SECTION -->
@@ -131,7 +142,7 @@
                 </p>
                 <% }) %>
             </div>
-          <% } %>
+            <% } %>
 
         </div>
       </div>
@@ -154,8 +165,7 @@
             <div class="card">
               <div class="card-img">
                 <img src="<%= element.poster_path 
-              ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg"
-                  %>"
+              ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg" %>"
                 alt="<%= element.title %>" />
               </div>
 
@@ -166,15 +176,15 @@
                 <i class="fa-solid fa-star"></i>
                 <%= element.vote_average %>
               </p>
-              <p class="icon"><i class="fa-solid fa-<%= element.media_type === " tv" ? "tv" : "clapperboard"
-                  %>"></i></p>
+              <p class="icon"><i class="fa-solid fa-<%= element.media_type === " tv" ? "tv" : "clapperboard" %>"></i>
+              </p>
               <h3 class="movie-title">
                 <%= element.title %> (<%= element.year %>)
               </h3>
             </div>
           </a>
         </div>
-      <% }) %>
+        <% }) %>
 
     </div>
-<%- include("partials/footer.ejs") %>
+    <%- include("partials/footer.ejs") %>

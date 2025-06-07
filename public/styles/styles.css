@@ -272,10 +272,15 @@ a {
 	font-size: 20px;
 }
 
+.text-1rem{
+	font-size: 1rem;
+	line-height: 1.4;
+}
+
 .parent {
 	position: relative;
 	width: 100vw;
-	height: 380px;
+	height: 431px;
 	margin-bottom: 2rem;
 }
 
@@ -407,7 +412,7 @@ a {
 
 .description,
 .directors,
-.little-details {
+.little-details, .cast {
 	margin-bottom: 1.2rem;
 }
 
