@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend+Giga:wght@100..900&family=Lexend:wght@100..900&display=swap');
+
 :root {
 	--main-blue: rgba(0, 123, 255, 0.6);
-	--light-blue: rgb(99, 130, 232);
+	--light-blue: rgb(140, 165, 248);
 }
 
 body,
@@ -10,38 +12,46 @@ html {
 	background-attachment: fixed;
 }
 
-/* <uniquifier>: Use a unique and descriptive class name */
-/* <weight>: Use a value from 100 to 900 */
+.gabarito, .bodytext {
+  font-family: "Gabarito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /*400 to 900*/
+  font-style: normal;
+  color: white;
+}
+
+
+.lexend {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* 100 to 900 */
+  font-style: normal;
+  color: white;
+}
+
 
 .lexend-giga-lexgig,
 .title {
 	font-family: "Lexend Giga", serif;
 	font-optical-sizing: auto;
-	font-weight: 600;
+	font-weight: 600; /* 100 to 900 */
 	font-style: normal;
 	color: white;
 }
-
-/* <uniquifier>: Use a unique and descriptive class name */
-/* <weight>: Use a value from 100 to 900 */
 
 .lexend-lex,
 .title2 {
 	font-family: "Lexend", serif;
 	font-optical-sizing: auto;
-	font-weight: 700;
+	font-weight: 700; /* 100 to 900 */
 	font-style: normal;
 	color: white;
 }
 
-/* <uniquifier>: Use a unique and descriptive class name */
-/* <weight>: Use a value from 300 to 800 */
-
-.funnel-display-fundis,
-.bodytext {
+.funnel-display-fundis {
 	font-family: "Funnel Display", serif;
 	font-optical-sizing: auto;
-	font-weight: 300;
+	font-weight: 300; /* 300 to 800 */
 	font-style: normal;
 	color: white;
 }
@@ -273,22 +283,23 @@ a {
 }
 
 .text-1rem{
-	font-size: 1rem;
+	font-size: 1.2rem;
 	line-height: 1.4;
 }
 
 .parent {
 	position: relative;
 	width: 100vw;
-	height: 431px;
+	height: fit-content;
 	margin-bottom: 2rem;
 }
 
 .parent .card {
-	width: 22%;
+	width: 260px;
+	height: auto;
 	box-shadow: none;
 	background-color: transparent;
-	height: 100%;
+	max-height: 75%;
 	margin: 0;
 }
 
@@ -350,9 +361,9 @@ a {
 	z-index: 1;
 	width: 100%;
 	height: 94%;
-	overflow: hidden;
 	padding: 0 2rem;
 	gap: 32px;
+	margin-bottom: 1.4rem;
 }
 
 .details {
@@ -401,13 +412,13 @@ a {
 }
 
 .genre {
-	padding: 5px 10px;
+	padding: 0.4rem;
 	background-color: #2e323de0;
 	border-radius: 10px;
 	width: fit-content;
 	height: auto;
 	text-align: center;
-	font-size: 1rem;
+	font-size: 0.8rem;
 }
 
 .description,
@@ -444,12 +455,13 @@ a {
 
 .about {
 	height: 100%;
-	background-color: #262930e0;
+	background-color: #0000002b;
 	padding: 15px;
 	border-radius: 15px;
 	max-width: 330px;
 	max-height: 520px;
 	overflow-x: auto;
+	border: 2px solid #ebebeb40;
 }
 
 .about-info {

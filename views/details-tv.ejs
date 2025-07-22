@@ -46,7 +46,7 @@
 
           <div class="description">
             <h5 class="title2">Description</h5>
-            <p id="description">
+            <p id="description" class="text-1rem">
               <%= info.overview %>
             </p>
           </div>
@@ -54,13 +54,26 @@
           <% if (info.created_by && info.created_by.length > 0) { %>
             <div class="directors">
               <h5 class="title2">Created by</h5>
-              <p>
+              <p class="text-1rem">
                 <%= info.created_by.length> 1
                   ? info.created_by.join(', ')
                   : info.created_by[0] %>
               </p>
             </div>
           <% } %>
+
+          <div class=" cast">
+                    <% if (info.cast && info.cast.length> 0) { %>
+                      <h5 class="title2">Cast</h5>
+                      <p class="text-1rem">
+                        <% if (info.cast.length> 1) { %>
+                          <%= info.cast.slice(0, 6).join(", ") + " ..." %>
+                            <% } else { %>
+                              <%= info.cast[0] %>
+                                <% } %>
+                      </p>
+                      <% } %>
+          </div>
 
         </div>
       </div>

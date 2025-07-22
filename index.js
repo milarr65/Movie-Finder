@@ -105,7 +105,7 @@ app.get("/details/movie/:id", async (req, res) => {
     try {
         const path = `${base_url}/movie/${req.params.id}`
         const params = {
-            append_to_response: "recommendations,keywords,credits,videos,images?language=en"
+            append_to_response: "recommendations,keywords,credits,videos,images?include_image_language=null,images?language=en"
         }
         const { general_info, recs, directors, keywords, videos, backdrops, posters } = await searchDetailsAPI(path, params, 'movie')
 
@@ -121,7 +121,7 @@ app.get("/details/tv/:id", async (req, res) => {
     try {
         const path = `${base_url}/tv/${req.params.id}`
         const params = {
-            append_to_response: "recommendations,content_ratings,videos,keywords,images?language=en"
+            append_to_response: "recommendations,content_ratings,videos,aggregate_credits,keywords,images?include_image_language=null,images?language=en"
         }
         const { general_info, recs, keywords, videos, backdrops, posters } = await searchDetailsAPI(path, params, "tv");
 
@@ -182,6 +182,7 @@ async function searchDetailsAPI(path, params, media_type) {
                 status: data.status,
                 tagline: data.tagline,
                 vote_average: data.vote_average.toFixed(1),
+                cast: data.aggregate_credits?.cast?.filter(person => person.known_for_department === "Acting").sort((a,b)=> {a.total_episode_count - b.total_episode_count}).map(person => person.name) || [],
                 content_rating: (
                     data.content_ratings?.results?.find(item => item.iso_3166_1 === "US") ||
                     data.content_ratings?.results?.[0] ||
@@ -202,8 +203,14 @@ async function searchDetailsAPI(path, params, media_type) {
 
             const keywords = data.keywords.results.map(item => item.name)
             const videos = data.videos.results.map(item => ({ site: item.site, key: item.key }))
-            const backdrops = data['images?language=en'].backdrops.map(item => item.file_path)
-            const posters = data['images?language=en'].posters.map(item => item.file_path)
+            
+            const backdropsEn = data['images?language=en'].backdrops?.map(item => item.file_path) || []
+            const backdropsNull = data['images?include_image_language=null'].backdrops?.map(item => item.file_path) || []
+            const backdrops = [...backdropsEn, ...backdropsNull]
+            
+            const postersEn = data['images?language=en'].posters?.map(item => item.file_path) || []
+            const postersNull = data['images?include_image_language=null'].posters?.map(item => item.file_path) || []
+            const posters = [...postersEn, ...postersNull]
 
             const complete_info = { general_info, recs, keywords, videos, backdrops, posters }
 
@@ -248,8 +255,14 @@ async function searchDetailsAPI(path, params, media_type) {
             const directors = data.credits.crew.filter(person => person.job === "Director").map(director => director.name) || "";
             const keywords = data.keywords.keywords.map(item => item.name)
             const videos = data.videos.results.map(item => ({ site: item.site, key: item.key }))
-            const backdrops = data['images?language=en'].backdrops.map(item => item.file_path)
-            const posters = data['images?language=en'].posters.map(item => item.file_path)
+            
+            const backdropsEn = data['images?language=en'].backdrops?.map(item => item.file_path) || []
+            const backdropsNull = data['images?include_image_language=null'].backdrops?.map(item => item.file_path) || []
+            const backdrops = [...backdropsEn, ...backdropsNull]
+            
+            const postersEn = data['images?language=en'].posters?.map(item => item.file_path) || []
+            const postersNull = data['images?include_image_language=null'].posters?.map(item => item.file_path) || []
+            const posters = [...postersEn, ...postersNull]
 
             const complete_info = { general_info, recs, directors, keywords, videos, backdrops, posters }
             // console.log(complete_info);
