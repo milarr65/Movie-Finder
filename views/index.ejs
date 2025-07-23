@@ -1,6 +1,5 @@
-<%- include("partials/header.ejs") %> <%- include('partials/search-form.ejs') %>
-
-    <% if (locals.page) { %>
+<%- include("partials/header.ejs") %> 
+  <% if (locals.page) { %>
 
       <h2 class="title heading">⚡ Trending <%= page==="movies" ? "movies" :page==="shows" ? "shows" : "" %> ⚡</h2>
       <div class="filter-buttons">

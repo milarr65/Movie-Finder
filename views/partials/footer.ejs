@@ -1,6 +1,6 @@
 <footer id="footer" class="bodytext">
-  <p class="">© <%= new Date().getFullYear() %> - Made by Mila Arroyo | All rights reserved</p>
-
+  <p> Made with ❤️ by Mila Arroyo</p>
+  <p><i class="fa-regular fa-copyright"></i> <%= new Date().getFullYear() %> | All rights reserved</p>
 
   <p class="row justify-content-center">Find me on <a class="my-links col-md-auto"
       href="https://www.github.com/milarr65">Github</a></p>
@@ -35,6 +35,13 @@
 
 <!-- MODAL SCRIPT -->
 <script src="/scripts/scripts.js"></script>
+<!-- NAVBAR DROPDOWN SCRIPT -->
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.dropdown');
+      dropdown.classList.toggle('show');
+    }
+  </script>
 </body>
 
 </html>

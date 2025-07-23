@@ -7,6 +7,7 @@
   <title>Movie Finder</title>
   <script src="https://kit.fontawesome.com/59e455373e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles/styles.css" />
+  <link rel="stylesheet" href="/styles/medium-size.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -23,10 +24,20 @@
         <h4 class="title">Movie Finder</h4>
       </a>
     </div>
+    <%- include('search-form.ejs') %>
     <ul class="nav-links title2">
-      <li><%- include('search-form.ejs') %></li>
       <li><a href="/movies">Movies</a></li>
       <li><a href="/shows">TV Shows</a></li>
       <li><a href="#footer">About</a></li>
     </ul>
+    <div class="dropdown-container" style="position: relative;">
+      <button class="dropdown-toggle" onclick="toggleDropdown()">
+        <i class="fa fa-bars"></i>
+      </button>
+      <ul class="dropdown title2">
+        <li><a href="/movies">Movies</a></li>
+        <li><a href="/shows">TV Shows</a></li>
+        <li><a href="#footer">About</a></li>
+      </ul>
+    </div>
   </nav>
