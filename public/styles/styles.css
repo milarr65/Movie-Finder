@@ -93,6 +93,7 @@ html {
 
 .nav-links li {
 	margin-left: 20px;
+	align-content: center;
 }
 
 .nav-links a {
@@ -241,45 +242,56 @@ a {
 }
 
 .form-container {
-	padding: 15px;
+	/* padding: 15px; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: max-content;
+	width: 30vw;
+	position: relative
 }
 
 #myForm {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	width: 50%;
-	height: 3.5rem;
+	width: 100%;
+	height: 100%;
 }
 
 #myForm input {
 	width: 100%;
-	height: 85%;
-	padding: 15px;
-	border-radius: 15px 0 0 15px;
-	border: 1px solid #4444443d;
+	height: 100%;
+	padding: 15px 25px;
+	border-radius: 50px;
+	border: 2px solid var(--main-blue);
+	background-color: transparent;
 	font-size: 20px;
-	background-color: #4444443d;
 	color: white;
+	position: relative;
+	outline: none;
 }
 
-#myForm input:focus {
-	border-color: var(--main-blue);
+#myForm input:focus{
+	border: 2px solid var(--light-blue);
 }
 
-#myForm button {
-	width: 60px;
-	height: 85%;
-	border: 1px solid var(--main-blue);
-	background: var(--main-blue);
+#myForm > button {
+	height: 70%;
+	width: 55px;
+	position: absolute;
+	right: 10px;
+	background-color: var(--main-blue);
+	border: none !important;
 	text-align: center;
 	color: #fff;
-	border-radius: 0 15px 15px 0;
+	border-radius: 50px;
 	cursor: pointer;
 	font-size: 20px;
+	transition: all 0.2s ease;
+}
+#myForm > button:hover {
+	background-color: rgba(0, 123, 255, 0.8);
 }
 
 .text-1rem{
