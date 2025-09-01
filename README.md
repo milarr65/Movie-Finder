@@ -1,19 +1,32 @@
-# Movie Finder || Web-dev Project
+# Movie Finder - Web-Dev Project
 
-This project is a fully functional movie hub where users can search for detailed information about movies and tv shows. It can handle search queries and it's organized based on popularity. (Not compatible for mobile devices)
+<details>
+<summary>Screenshots</summary>
+<br/>
 
-Details, pictures and videos are provided by [The Movie Database API](https://developer.themoviedb.org/docs/getting-started)
+![screenshot1](public/images/screenshot1.png)
+![screenshot2](public/images/screenshot2.png)
+![screenshot3](public/images/screenshot3.png)
+</details>
 
-<strong>All the code was written by me, no tutorial was used for the development of this website.</strong>
+## About
 
-## Screenshots
+This site is a digital hub where users can look up any movie or tv show to get relevant information like cast, ratings, genres, release dates, as well as images and videos. Based on the search, users will also get recommended related content.
 
-![screenshot1](<public/images/Captura de pantalla 2025-04-06 193850.png>)
-![screenshot2](<public/images/Captura de pantalla 2025-04-06 193758.png>)
+This project was originally an assignment from **_"The Complete Full-Stack Web Development Bootcamp"_** by Angela Yu. We were given no starting code and full creative freedom to build it. The goal was to use a free API to build a website, so I decided to go with [TMDB's](https://developer.themoviedb.org/) since I really like movies and shows.
 
-### About
+I also opted to not use a styles library and instead write all the css myself, which was a challenge for sure 😅 But it's been very rewarding to see my vision come to life bit by bit.
 
-This project is an assignment from online course **_"The Complete Full-Stack Web Development Bootcamp"_**
-The goal was to use an api of our choosing and build a website based on that. We were given full control over the code and appearance of it.
+_Made with Node.js, Express, Ejs and Axios._
 
-Built with NodeJS and Node Express.
+## How to run this locally
+
+First you need to have Node.js installed. I'm currently using version `20.18.0`, as well as `npm 10.8.2`
+
+1. Open a new terminal and git clone this repo
+   ```bash
+   git clone https://github.com/milarr65/Movie-Finder.git
+   cd movie-finder
+   ```
+2. In your terminal run `npm install`. This will install the necessary dependencies.
+3. After that's done run `npm run dev`, this will serve the app on [localhost:3000](http://localhost:3000) which you can visit in your browser.
