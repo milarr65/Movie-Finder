@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Movie Finder</title>
-  <script src="https://kit.fontawesome.com/59e455373e.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/styles/styles.css" />
   <link rel="stylesheet" href="/styles/medium-size.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,18 +25,19 @@
     </div>
     <%- include('search-form.ejs') %>
       <ul class="nav-links title2">
-        <li><a href="/movies">Movies</a></li>
-        <li><a href="/shows">TV Shows</a></li>
-        <li><a onclick="showModal()">About</a></li>
+        <li><a href="/movies"><i data-lucide="popcorn"></i>Movies</a></li>
+        <li><a href="/shows"><i data-lucide="tv"></i>TV Shows</a></li>
+        <li><a onclick="showModal()"><i data-lucide="Info"></i>About</a></li>
       </ul>
+
       <div class="dropdown-container" style="position: relative;">
         <button class="dropdown-toggle" onclick="toggleDropdown()">
-          <i class="fa fa-bars"></i>
+          <i data-lucide="Menu"></i>
         </button>
         <ul class="dropdown title2">
-          <li><a href="/movies">Movies</a></li>
-          <li><a href="/shows">TV Shows</a></li>
-          <li><a href="#footer">About</a></li>
+          <li><a href="/movies"><i data-lucide="popcorn"></i>Movies</a></li>
+          <li><a href="/shows"><i data-lucide="tv"></i>TV Shows</a></li>
+          <li><a onclick="showModal()"><i data-lucide="Info"></i>About</a></li>
         </ul>
       </div>
   </nav>

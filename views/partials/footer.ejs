@@ -43,6 +43,10 @@
 
 <!-- MODAL SCRIPT -->
 <script src="/scripts/scripts.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
 <!-- NAVBAR DROPDOWN SCRIPT -->
 <script>
   function toggleDropdown() {
@@ -53,7 +57,7 @@
 <script>
   const modal = document.getElementById("about-modal");
 
-  const modalBackdrop = document.getElementsByClassName("modal-backdrop")
+  const modalBackdrop = document.querySelector(".modal-backdrop");
   modalBackdrop.addEventListener("click", () => { modal.close() });
 
   function showModal() {

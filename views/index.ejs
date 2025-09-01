@@ -1,56 +1,59 @@
-<%- include("partials/header.ejs") %> 
+<%- include("partials/header.ejs") %>
   <% if (locals.page) { %>
 
-      <h2 class="title heading">⚡ Trending <%= page==="movies" ? "movies" :page==="shows" ? "shows" : "" %> ⚡</h2>
-      <div class="filter-buttons">
-        <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=day"
-          class="filter-btn bodytext <%= selectedTimeframe==='day' ? 'active' : '' %>"
-            >
-            Today
-        </a>
-        <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=week"
-          class="filter-btn bodytext <%= selectedTimeframe==='week' ? 'active' : '' %>"
-            >
-            This Week
-        </a>
-      </div>
-      <% } %>
+    <h2 class="title heading">⚡ Trending <%= page==="movies" ? "movies" :page==="shows" ? "shows" : "" %> ⚡</h2>
+    <div class="filter-buttons">
+      <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=day"
+        class="filter-btn bodytext <%= selectedTimeframe==='day' ? 'active' : '' %>"
+          >
+          Today
+      </a>
+      <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=week"
+        class="filter-btn bodytext <%= selectedTimeframe==='week' ? 'active' : '' %>"
+          >
+          This Week
+      </a>
+    </div>
+    <% } %>
 
-        <div class="trending">
-          <% if (locals.data) { %>
-            <% data.forEach(element=> { %>
-              <div class="movie-container">
+      <div class="trending">
+        <% if (locals.data) { %>
+          <% data.forEach(element=> { %>
+            <div class="movie-container">
 
-                <a href="/details/<%= element.media_type %>/<%= element.id %>">
-                  <div class="card">
+              <a href="/details/<%= element.media_type %>/<%= element.id %>">
+                <div class="card">
 
-                    <div class="card-img">
-                      <img src="<%= element.poster_path 
+                  <div class="card-img">
+                    <img src="<%= element.poster_path 
                       ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg"
-                        %>"
-                      alt="<%= element.media_type==="tv" ? element.name : element.title %>" />
-                    </div>
-
+                      %>"
+                    alt="<%= element.media_type==="tv" ? element.name : element.title %>" />
                   </div>
 
-                  <div class="movie-info bodytext">
-                    <p class="rating icon">
-                      <i class="fa-solid fa-star"></i>
-                      <%= element.vote_average.toFixed(1) %>
-                    </p>
-                    <p class="icon">
-                        <i class="fa-solid fa-<%= element.media_type === 'tv' ? 'tv' : "clapperboard" %>"></i>
-                    </p>
-                    <h3 class="movie-title">
-                      <%= element.media_type==="tv" ? element.name : element.title %>
-                        (<%= element.media_type==="tv" ? element.first_air_date.split("-")[0] :
-                          element.release_date.split("-")[0] %>)
-                    </h3>
-                  </div>
-                </a>
-              </div>
-              <% }) %>
-                <% } %>
-        </div>
+                </div>
 
-        <%- include("partials/footer.ejs") %>
+                <div class="movie-info bodytext">
+                  <p class="rating icon">
+                    <i data-lucide="star"></i>
+                    <%= element.vote_average.toFixed(1) %>
+                  </p>
+                  <div class="media-type">
+                    <i data-lucide=<%=element.media_type==="tv" ? "tv" : "popcorn" %> alt="media icon"></i>
+                    <span>
+                      <%= element.media_type==="tv" ? "Series" : "Film" %>
+                    </span>
+                  </div>
+                  <h3 class="movie-title">
+                    <%= element.media_type==="tv" ? element.name : element.title %>
+                      (<%= element.media_type==="tv" ? element.first_air_date.split("-")[0] :
+                        element.release_date.split("-")[0] %>)
+                  </h3>
+                </div>
+              </a>
+            </div>
+            <% }) %>
+              <% } %>
+      </div>
+
+      <%- include("partials/footer.ejs") %>

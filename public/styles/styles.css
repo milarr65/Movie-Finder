@@ -109,6 +109,14 @@ html {
 	transition: background-color 0.3s;
 	line-height: 1.5rem;
 	cursor: pointer;
+	display: flex;
+	gap: 0.6rem;
+	align-items: center;
+
+	.lucide {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
 }
 
 .nav-links li a:hover {
@@ -239,10 +247,10 @@ a {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: max-content;
 	width: 30vw;
 	position: relative;
 	height: 2.7rem;
+	min-width: 14rem;
 }
 
 #searchbar {
@@ -283,6 +291,12 @@ a {
 	font-size: 1rem;
 	transition: all 0.2s ease;
 	padding: 0.3rem 0.5rem;
+
+	.lucide {
+		width: 1.3rem;
+		height: 1.3rem;
+		stroke-width: 3px;
+	}
 }
 #searchbar > button:hover {
 	background-color: var(--main-blue);
@@ -357,14 +371,32 @@ a {
 	object-position: top;
 }
 
-.icon {
-	width: 60px;
+.media-type {
+	display: flex;
+	gap: 0.5rem;
+	width: fit-content;
 	color: white;
+	align-items: center;
+
+	.lucide {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
 }
 
-.rating.icon i {
-	color: rgb(240, 213, 59);
+.rating.icon {
+	display: flex;
+	gap: 0.3rem;
+	align-items: center;
+
+	.lucide {
+		color: rgb(210, 164, 67);
+		fill: rgb(210, 164, 67);
+		width: 1.2rem;
+		height: 1.2rem;
+	}
 }
+
 .info-container {
 	display: flex;
 	flex-direction: row;
@@ -384,7 +416,7 @@ a {
 	width: 75%;
 	padding: 1rem;
 	flex-direction: column;
-	row-gap: 10px;
+	row-gap: 14px;
 	font-size: 1.2rem;
 	text-shadow: #000 1px 0 4px;
 	font-weight: 400;
@@ -393,8 +425,21 @@ a {
 .little-details {
 	display: flex;
 	flex-direction: row;
-	column-gap: 7px;
+	gap: 9px;
 	align-items: center;
+	flex-wrap: wrap;
+}
+
+.runtime {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+
+	.lucide {
+		aspect-ratio: 1/1;
+		height: 1.2rem;
+	}
 }
 
 .details p.title {
@@ -418,7 +463,7 @@ a {
 .details-genres {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: start;
 	column-gap: 7px;
 	margin-left: 10px;
 	overflow-x: auto;
@@ -426,12 +471,13 @@ a {
 
 .genre {
 	padding: 0.4rem;
-	background-color: #2e323de0;
+	background-color: #2e323d;
+	border: 1px solid #7586a4e3;
 	border-radius: 10px;
 	width: fit-content;
 	height: auto;
 	text-align: center;
-	font-size: 0.8rem;
+	font-size: 1rem;
 }
 
 .description,
@@ -478,6 +524,32 @@ a {
 	overflow-x: auto;
 	border: 2px solid #ebebeb40;
 	width: 35%;
+
+	.title {
+		font-size: 1.2rem;
+		display: flex;
+		gap: 5px;
+		align-items: center;
+	}
+
+	.lucide {
+		width: 1.4rem;
+		height: 1.4rem;
+	}
+}
+
+.images-container .lucide,
+.video-container .lucide {
+	width: 1.3rem;
+	height: 1.3rem;
+}
+
+.second-section .title {
+	display: flex;
+	gap: 7px;
+	align-items: center;
+	font-size: 1.3rem;
+	margin-bottom: 1rem;
 }
 
 .about-info {

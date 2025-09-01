@@ -1,40 +1,43 @@
-<%- include('partials/header.ejs') %> 
-    <h2 class="title2 heading">Search Results</h1>
+<%- include('partials/header.ejs') %>
+  <h2 class="title2 heading">Search Results</h1>
 
-      <div class="search_results">
-        <% if (locals.data) { %>
-          <% data.filter(element=> element.media_type !== "person").forEach(element => { %>
-            <div class="movie-container">
+    <div class="search_results">
+      <% if (locals.data) { %>
+        <% data.filter(element=> element.media_type !== "person").forEach(element => { %>
+          <div class="movie-container">
 
-              <a href="/details/<%= element.media_type %>/<%= element.id %>">
-                <div class="card">
-                  <div class="card-img">
-                    <img src="<%= element.poster_path 
+            <a href="/details/<%= element.media_type %>/<%= element.id %>">
+              <div class="card">
+                <div class="card-img">
+                  <img src="<%= element.poster_path 
                       ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg"
-                      %>"
-                    alt="<%= element.media_type==="tv" ? element.name : element.title %>" />
-                  </div>
-
+                    %>"
+                  alt="<%= element.media_type==="tv" ? element.name : element.title %>" />
                 </div>
 
-                <div class="movie-info bodytext">
-                  <p class="rating icon">
-                    <i class="fa-solid fa-star"></i>
-                    <%= element.vote_average?.toFixed(1) || element.vote_average %>
-                  </p>
-                  <p class="icon">
-                    <i class="fa-solid fa-<%= element.media_type === 'tv' ? 'tv' : "clapperboard" %>"></i>
-                  </p>
-                  <h3 class="movie-title">
-                    <%= element.media_type==="tv" ? element.name : element.title %>
-                      (<%= element.media_type==="tv" ? element.first_air_date?.split("-")[0] :
-                        element.release_date?.split("-")[0] || "nan" %>)
-                  </h3>
-                </div>
-              </a>
-            </div>
-            <% }) %>
-        <% } %>
-      </div>
+              </div>
 
-<%- include('partials/footer.ejs') %>
+              <div class="movie-info bodytext">
+                <p class="rating icon">
+                  <i class="fa-solid fa-star"></i>
+                  <%= element.vote_average?.toFixed(1) || element.vote_average %>
+                </p>
+                <div class="media-type">
+                  <i data-lucide=<%=element.media_type==="tv" ? "tv" : "popcorn" %> alt="media icon"></i>
+                  <span>
+                    <%= element.media_type==="tv" ? "Series" : "Film" %>
+                  </span>
+                </div>
+                <h3 class="movie-title">
+                  <%= element.media_type==="tv" ? element.name : element.title %>
+                    (<%= element.media_type==="tv" ? element.first_air_date?.split("-")[0] :
+                      element.release_date?.split("-")[0] || "nan" %>)
+                </h3>
+              </div>
+            </a>
+          </div>
+          <% }) %>
+            <% } %>
+    </div>
+
+    <%- include('partials/footer.ejs') %>

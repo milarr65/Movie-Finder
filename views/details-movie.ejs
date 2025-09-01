@@ -1,59 +1,63 @@
 <%- include("partials/header.ejs") %>
-    <div class="parent">
-      <div class="backdrop">
-        <img src="https://image.tmdb.org/t/p/original<%= info.backdrop_path %>" alt="<%= info.title%>" />
+  <div class="parent">
+    <div class="backdrop">
+      <img src="https://image.tmdb.org/t/p/original<%= info.backdrop_path %>" alt="<%= info.title%>" />
+    </div>
+
+    <div class="info-container">
+      <div class="card">
+        <div class="card-img">
+          <img src="<%= info.poster_path 
+                      ? " https://image.tmdb.org/t/p/w500" + info.poster_path
+            : "../public/images/dummy-image-portrait.jpg" %>"
+          alt="<%= info.title %>" />
+        </div>
       </div>
 
-      <div class="info-container">
-        <div class="card">
-          <div class="card-img">
-            <img src="<%= info.poster_path 
-                      ? " https://image.tmdb.org/t/p/w500" + info.poster_path
-              : "../public/images/dummy-image-portrait.jpg" %>"
-            alt="<%= info.title %>" />
+      <div class="details bodytext">
+        <p class="title">
+          <%= info.title %> (<%= info.year %>)
+        </p>
+        <p class="tagline">
+          <%= info.tagline %>
+        </p>
+
+        <div class="little-details">
+          <div class="rating icon">
+            <i data-lucide="star"></i>
+            <span>
+              <%= info.vote_average %>
+            </span>
+          </div>
+          <div class="runtime">
+            <i data-lucide="clock"></i>
+            <span>
+              <%= info.runtime %>
+            </span>
+          </div>
+
+          <div class="details-genres">
+            <% info.genres.forEach(element=> { %>
+              <p class="genre"># <%= element %>
+              </p>
+              <% }) %>
           </div>
         </div>
 
-        <div class="details bodytext">
-          <p class="title">
-            <%= info.title %> (<%= info.year %>)
+        <div class="description">
+          <h5 class="title2">Description</h5>
+          <p id="description" class="text-1rem">
+            <%= info.overview %>
           </p>
-          <p class="tagline">
-            <%= info.tagline %>
-          </p>
-
-          <div class="little-details">
-            <p class="rating icon">
-              <i class="fa-solid fa-star"></i>
-              <%= info.vote_average %>
-            </p>
-            <p class="runtime">
-              <i class="fa-solid fa-clock"></i>
-              <%= info.runtime %>
-            </p>
-
-            <div class="details-genres">
-              <% info.genres.forEach(element=> { %>
-                <p class="genre"># <%= element %>
-                </p>
-                <% }) %>
-            </div>
-          </div>
-
-          <div class="description">
-            <h5 class="title2">Description</h5>
-            <p id="description" class="text-1rem">
-              <%= info.overview %>
-            </p>
-          </div>
+        </div>
 
 
-          <div class="directors">
-            <% if (directors && directors.length> 0) { %>
-              <h5 class="title2">Directed by</h5>
-              <p class="text-1rem">
-                <% if (directors.length> 1) { %>
-                  <%= directors.join(", ") %>
+        <div class="directors">
+          <% if (directors && directors.length> 0) { %>
+            <h5 class="title2">Directed by</h5>
+            <p class="text-1rem">
+              <% if (directors.length> 1) { %>
+                <%= directors.join(", ") %>
                 <% } else { %>
                   <%= directors[0] %>
                 <% } %>
@@ -62,127 +66,141 @@
           </div>
           
           <div class=" cast">
-                    <% if (info.cast && info.cast.length> 0) { %>
-                      <h5 class="title2">Cast</h5>
-                      <p class="text-1rem">
-                        <% if (info.cast.length> 1) { %>
-                          <%= info.cast.slice(0, 6).join(", ") + " ..." %>
-                            <% } else { %>
-                              <%= info.cast[0] %>
-                                <% } %>
-                      </p>
-                      <% } %>
-          </div>
-
+                  <% if (info.cast && info.cast.length> 0) { %>
+                    <h5 class="title2">Cast</h5>
+                    <p class="text-1rem">
+                      <% if (info.cast.length> 1) { %>
+                        <%= info.cast.slice(0, 6).join(", ") + " ..." %>
+                          <% } else { %>
+                            <%= info.cast[0] %>
+                              <% } %>
+                    </p>
+                    <% } %>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <div class=" second-section">
-      <div class="media">
-        <!-- VIDEOS SECTION -->
-        <% if (videos) { %>
-          <div class="video-container scrollable-container">
-            <h3 class="title"><i class="fa-brands fa-youtube"></i> Videos (<%= videos.length %>)</h3>
-            <div class="video-wrapper">
-              <% videos.forEach(video=> { %>
-                <% if (video.site==="YouTube" ) { %>
-                  <img class="clickable-video" src="https://img.youtube.com/vi/<%= video.key %>/maxresdefault.jpg"
-                    data-video-id="<%= video.key %>" alt="Video Thumbnail">
-                  <% } %>
-                    <% }) %>
+  <div class="second-section">
+    <div class="media">
+      <!-- VIDEOS SECTION -->
+      <% if (videos) { %>
+        <div class="video-container scrollable-container">
+          <div class="title">
+            <i data-lucide="Clapperboard"></i>
+            <span>
+              Videos (<%= videos.length %>)
+            </span>
+          </div>
+          <div class="video-wrapper">
+            <% videos.forEach(video=> { %>
+              <% if (video.site==="YouTube" ) { %>
+                <img class="clickable-video" src="https://img.youtube.com/vi/<%= video.key %>/maxresdefault.jpg"
+                  data-video-id="<%= video.key %>" alt="Video Thumbnail">
+                <% } %>
+                  <% }) %>
+          </div>
+        </div>
+        <% } %>
+
+
+          <!-- IMAGES SECTION -->
+          <% if (images.length> 0) { %>
+            <div class="images-container scrollable-container">
+              <div class="title">
+                <i data-lucide="images"></i>
+                <span>
+                  Images (<%= images.length %>)
+                </span>
+              </div>
+              <div class="images-wrapper">
+                <% images.forEach(image=> { %>
+                  <img class="clickable-image" src="https://image.tmdb.org/t/p/original<%= image %>" alt="">
+                  <% }) %>
+              </div>
             </div>
+            <% } %>
+    </div>
+
+    <!-- EXTRA INFO SECTION -->
+    <div class="about scrollable-container">
+      <h3 class="title">
+        <i data-lucide="Sparkles"></i>
+        More Details
+      </h3>
+
+      <div class="about-info bodytext">
+
+        <h5 class="title2">Original Name:</h5>
+        <p>
+          <%= info.og_title %>
+        </p>
+        <h5 class="title2">Original Language:</h5>
+        <p>
+          <%= info.og_lang %>
+        </p>
+        <h5 class="title2">Theatrical Release:</h5>
+        <p>
+          <%= info.release_date %>
+        </p>
+
+        <% if (keywords) { %>
+          <h5 class="title2">Keywords</h5>
+          <div class="keywords-container">
+            <% keywords.forEach(word=> { %>
+              <p class="keyword">
+                <%= word %>
+              </p>
+              <% }) %>
           </div>
           <% } %>
 
-
-            <!-- IMAGES SECTION -->
-            <% if (images.length> 0) { %>
-              <div class="images-container scrollable-container">
-                <h3 class="title"><i class="fa-regular fa-images"></i> Images (<%= images.length %>)</h3>
-                <div class="images-wrapper">
-                  <% images.forEach(image=> { %>
-                    <img class="clickable-image" src="https://image.tmdb.org/t/p/original<%= image %>" alt="">
-                    <% }) %>
-                </div>
-              </div>
-              <% } %>
-      </div>
-
-      <!-- EXTRA INFO SECTION -->
-      <div class="about scrollable-container">
-        <h3 class="title">
-          <i class="fa-solid fa-circle-info"></i>
-          About
-        </h3>
-
-        <div class="about-info bodytext">
-
-          <h5 class="title2">Original Name:</h5>
-          <p>
-            <%= info.og_title %>
-          </p>
-          <h5 class="title2">Original Language:</h5>
-          <p>
-            <%= info.og_lang %>
-          </p>
-          <h5 class="title2">Theatrical Release:</h5>
-          <p>
-            <%= info.release_date %>
-          </p>
-
-          <% if (keywords) { %>
-            <h5 class="title2">Keywords</h5>
-            <div class="keywords-container">
-              <% keywords.forEach(word=> { %>
-                <p class="keyword">
-                  <%= word %>
-                </p>
-                <% }) %>
-            </div>
-            <% } %>
-
-        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Popup Modal -->
-    <div id="popup-modal" class="hidden">
-      <div class="modal-content">
-        <span id="close-modal"><i class="fa-solid fa-circle-xmark"></i></span>
-        <div id="popup-content"></div>
-      </div>
+  <!-- Popup Modal -->
+  <div id="popup-modal" class="hidden">
+    <div class="modal-content">
+      <span id="close-modal"><i class="fa-solid fa-circle-xmark"></i></span>
+      <div id="popup-content"></div>
     </div>
+  </div>
 
-    <!-- RECOMENDED SECTION -->
-    <h2 class="title heading">Recommended</h2>
-    <div class="similar">
-      <% recs.forEach(element=> { %>
-        <div class="movie-container">
-          <a href="/details/<%= element.media_type %>/<%= element.id %>">
-            <div class="card">
-              <div class="card-img">
-                <img src="<%= element.poster_path 
+  <!-- RECOMENDED SECTION -->
+  <h2 class="title heading">Recommended</h2>
+  <div class="similar">
+    <% recs.forEach(element=> { %>
+      <div class="movie-container">
+        <a href="/details/<%= element.media_type %>/<%= element.id %>">
+          <div class="card">
+            <div class="card-img">
+              <img src="<%= element.poster_path 
               ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg" %>"
-                alt="<%= element.title %>" />
-              </div>
-
+              alt="<%= element.title %>" />
             </div>
 
-            <div class="movie-info bodytext">
-              <p class="rating icon">
-                <i class="fa-solid fa-star"></i>
-                <%= element.vote_average %>
-              </p>
-              <p class="icon"><i class="fa-solid fa-<%= element.media_type === " tv" ? "tv" : "clapperboard" %>"></i>
-              </p>
-              <h3 class="movie-title">
-                <%= element.title %> (<%= element.year %>)
-              </h3>
-            </div>
-          </a>
-        </div>
-        <% }) %>
+          </div>
 
-    </div>
-    <%- include("partials/footer.ejs") %>
+          <div class="movie-info bodytext">
+            <p class="rating icon">
+              <i data-lucide="star"></i>
+              <%= element.vote_average %>
+            </p>
+            <div class="media-type">
+              <i data-lucide="popcorn" alt="media icon"></i>
+              <span>
+                Film
+              </span>
+            </div>
+            <h3 class="movie-title">
+              <%= element.title %> (<%= element.year %>)
+            </h3>
+          </div>
+        </a>
+      </div>
+      <% }) %>
+
+  </div>
+  <%- include("partials/footer.ejs") %>
