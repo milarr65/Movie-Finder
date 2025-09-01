@@ -1,47 +1,67 @@
 <footer id="footer" class="bodytext">
   <p> Made with ❤️ by Mila Arroyo</p>
-  <p><i class="fa-regular fa-copyright"></i> <%= new Date().getFullYear() %> | All rights reserved</p>
+  <p><i class="fa-regular fa-copyright"></i>
+    <%= new Date().getFullYear() %> | All rights reserved
+  </p>
 
   <p class="row justify-content-center">Find me on <a class="my-links col-md-auto"
       href="https://www.github.com/milarr65">Github</a></p>
   <hr style="width: 70%; opacity: 0.7; margin-bottom: 10px;">
-  <h3 class="title">About This Project</h3>
 
-  <div class="footer-container about-text bodytext" style="padding: 10px 7rem;">
-    <p>
-      This project is a fully functional movie hub where users can search for detailed information about movies and tv
-      shows. It can handle search queries and it's organized based on popularity.
-    </p>
-    <p>
-      Details, pictures and videos are provided by
-      <a class="my-links" href="https://developer.themoviedb.org/docs/getting-started">
-        The Movie Database API
-      </a>
-      <strong>All the code was written by me, no tutorial was used in the development of this website.</strong>
-    </p>
-
-    <p>This project is an assignment of the web course
-      <strong>
-        "The Complete Full-Stack Web Development Bootcamp"
-      </strong>
-      Made by The App Brewery. It's available on
-      <a class="my-links"
-        href="https://www.udemy.com/share/1013gG3@trCxiNCaWDKxEWGePtqm9vBNp0Lm1tfZeiWTZvnhWp0szwXjfiMMwp_6cCWS2zVRvQ==/">
-        Udemy
-      </a>
-    </p>
-  </div>
 </footer>
+
+<dialog id="about-modal" class="modal bodytext">
+  <div class="modal-box">
+    <h3 class="title2">About This Project</h3>
+    <div class="about-contents">
+      <p>
+        This site is a digital hub where users can look up any movie or tv show to get relevant information like cast,
+        ratings, genres, release dates, as well as images and videos. Based on the search, users will also get
+        recommended related content.
+      </p>
+      <p>
+        This project was originally an assignment from <em>"The Complete Full-Stack Web Development Bootcamp"</em> by
+        Angela Yu. We were given no starting code and full creative freedom to build it. The goal was to use a free API
+        to build a website, so I decided to go with <a href="https://developer.themoviedb.org/">TMDB's</a> since I
+        really like movies and shows.
+      </p>
+      <p>
+        I also opted to not use a styles library and instead write all the css myself, which was a challenge for sure 😅
+        But it's been very rewarding to see my vision come to life bit by bit.
+      </p>
+
+    </div>
+    <div class="modal-actions">
+      <button><a href="https://github.com/milarr65/Movie-Finder" style="color: inherit;">Github Repo</a></button>
+      <button class="modal-close" onclick="document.getElementById('about-modal').close()">Close</button>
+    </div>
+  </div>
+  <form class="modal-backdrop" method="dialog">
+    <button>close</button>
+  </form>
+</dialog>
 
 <!-- MODAL SCRIPT -->
 <script src="/scripts/scripts.js"></script>
 <!-- NAVBAR DROPDOWN SCRIPT -->
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.querySelector('.dropdown');
-      dropdown.classList.toggle('show');
+<script>
+  function toggleDropdown() {
+    const dropdown = document.querySelector('.dropdown');
+    dropdown.classList.toggle('show');
+  }
+</script>
+<script>
+  const modal = document.getElementById("about-modal");
+
+  const modalBackdrop = document.getElementsByClassName("modal-backdrop")
+  modalBackdrop.addEventListener("click", () => { modal.close() });
+
+  function showModal() {
+    if (!modal.open) {
+      modal.showModal()
     }
-  </script>
+  }
+</script>
 </body>
 
 </html>

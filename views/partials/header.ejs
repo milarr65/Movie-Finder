@@ -25,19 +25,19 @@
       </a>
     </div>
     <%- include('search-form.ejs') %>
-    <ul class="nav-links title2">
-      <li><a href="/movies">Movies</a></li>
-      <li><a href="/shows">TV Shows</a></li>
-      <li><a href="#footer">About</a></li>
-    </ul>
-    <div class="dropdown-container" style="position: relative;">
-      <button class="dropdown-toggle" onclick="toggleDropdown()">
-        <i class="fa fa-bars"></i>
-      </button>
-      <ul class="dropdown title2">
+      <ul class="nav-links title2">
         <li><a href="/movies">Movies</a></li>
         <li><a href="/shows">TV Shows</a></li>
-        <li><a href="#footer">About</a></li>
+        <li><a onclick="showModal()">About</a></li>
       </ul>
-    </div>
+      <div class="dropdown-container" style="position: relative;">
+        <button class="dropdown-toggle" onclick="toggleDropdown()">
+          <i class="fa fa-bars"></i>
+        </button>
+        <ul class="dropdown title2">
+          <li><a href="/movies">Movies</a></li>
+          <li><a href="/shows">TV Shows</a></li>
+          <li><a href="#footer">About</a></li>
+        </ul>
+      </div>
   </nav>
