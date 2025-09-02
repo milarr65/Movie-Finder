@@ -1,59 +1,52 @@
-<%- include("partials/header.ejs") %>
-  <% if (locals.page) { %>
+<% if (locals.page) { %>
 
-    <h2 class="title heading">⚡ Trending <%= page==="movies" ? "movies" :page==="shows" ? "shows" : "" %> ⚡</h2>
-    <div class="filter-buttons">
-      <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=day"
-        class="filter-btn bodytext <%= selectedTimeframe==='day' ? 'active' : '' %>"
-          >
-          Today
-      </a>
-      <a href="/<%= page === " movies" ? "movies" :page==="shows" ? "shows" : "" %>?timeframe=week"
-        class="filter-btn bodytext <%= selectedTimeframe==='week' ? 'active' : '' %>"
-          >
-          This Week
-      </a>
-    </div>
-    <% } %>
+<h2 class="title heading">
+  ⚡ Trending <%= page==="movies" ? "movies" : page==="shows" ? "shows" : "" %> ⚡
+</h2>
+<div class="filter-buttons">
+  <% let path=page==="movies" ? "movies" : page==="shows" ? "shows" : "" ; %> <% let
+  isDayActive=selectedTimeframe==="day" ? "active" : "" ; %> <% let
+  isWeekActive=selectedTimeframe==="week" ? "active" : "" ; %>
 
-      <div class="trending">
-        <% if (locals.data) { %>
-          <% data.forEach(element=> { %>
-            <div class="movie-container">
+  <a href="/<%= path %>?timeframe=day" class="filter-btn bodytext <%= isDayActive %>"> Today </a>
+  <a href="/<%= path %>?timeframe=week" class="filter-btn bodytext <%= isWeekActive %>">
+    This Week
+  </a>
+</div>
+<% } %>
 
-              <a href="/details/<%= element.media_type %>/<%= element.id %>">
-                <div class="card">
-
-                  <div class="card-img">
-                    <img src="<%= element.poster_path 
-                      ? " https://image.tmdb.org/t/p/w500" + element.poster_path : "/images/dummy-image-portrait.jpg"
-                      %>"
-                    alt="<%= element.media_type==="tv" ? element.name : element.title %>" />
-                  </div>
-
-                </div>
-
-                <div class="movie-info bodytext">
-                  <p class="rating icon">
-                    <i data-lucide="star"></i>
-                    <%= element.vote_average.toFixed(1) %>
-                  </p>
-                  <div class="media-type">
-                    <i data-lucide=<%=element.media_type==="tv" ? "tv" : "popcorn" %> alt="media icon"></i>
-                    <span>
-                      <%= element.media_type==="tv" ? "Series" : "Film" %>
-                    </span>
-                  </div>
-                  <h3 class="movie-title">
-                    <%= element.media_type==="tv" ? element.name : element.title %>
-                      (<%= element.media_type==="tv" ? element.first_air_date.split("-")[0] :
-                        element.release_date.split("-")[0] %>)
-                  </h3>
-                </div>
-              </a>
-            </div>
-            <% }) %>
-              <% } %>
+<div class="trending">
+  <% if (locals.data) { %> <% data.forEach(element=> { %>
+  <div class="movie-container">
+    <a href="/details/<%= element.media_type %>/<%= element.id %>">
+      <div class="card">
+        <div class="card-img">
+          <% let imgSrc=element.poster_path ? "https://image.tmdb.org/t/p/w500" +
+          element.poster_path : "/images/dummy-image-portrait.jpg" %> <% let
+          name=element.media_type==="tv" ? element.name : element.title %>
+          <img src="<%= imgSrc %>" alt="<%= name %>" />
+        </div>
       </div>
 
-      <%- include("partials/footer.ejs") %>
+      <div class="movie-info bodytext">
+        <p class="rating icon">
+          <i data-lucide="star"></i>
+          <%= element.vote_average.toFixed(1) %>
+        </p>
+        <div class="media-type">
+          <% let lucideIcon=element.media_type==="tv" ? "tv" : "popcorn" ; %>
+          <i data-lucide="<%= lucideIcon %>" alt="media icon"></i>
+          <span>
+            <%= element.media_type==="tv" ? "Series" : "Film" %>
+          </span>
+        </div>
+        <% let title=element.media_type==="tv" ? element.name : element.title %>
+        <% let year=element.media_type==="tv" ? element.first_air_date.split("-")[0] :
+                    element.release_date.split("-")[0] %>
+        <h3 class="movie-title"><%= title %> (<%= year %>)</h3>
+      </div>
+    </a>
+  </div>
+  <% }) %>
+  <% } %>
+</div>

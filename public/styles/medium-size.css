@@ -8,12 +8,6 @@
 		min-height: max-content;
 	}
 
-	/* .backdrop {
-        position: absolute;
-        top: 0;
-        width: fit-content;
-    } */
-
 	.backdrop > img {
 		-webkit-mask-image: linear-gradient(
 			to top,
@@ -25,8 +19,7 @@
 			rgba(0, 0, 0, 0) 45%,
 			rgba(0, 0, 0, 1) 100%
 		);
-		z-index: 0; /* Send to back */
-		/* object-fit: contain; */
+		z-index: 0; 
 	}
 
 	.info-container {
@@ -164,5 +157,16 @@
 
 	.details-genres {
 		margin-left: 0;
+	}
+
+	.error-container{
+		.lucide {
+			width: 4.5rem;
+			height: 4.5rem;
+		}
+		
+		p{
+			font-size: 1.3rem;
+		}
 	}
 }
