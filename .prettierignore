@@ -1,7 +1,6 @@
 node_modules
 dist
 build
-public
 .env
 views/partials/footer
 views/partials/header
