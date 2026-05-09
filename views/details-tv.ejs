@@ -85,7 +85,9 @@
     <% } %>
 
     <!-- IMAGES SECTION -->
-    <% if (images.length> 0) { %>
+    <% if (!images || images.length === 0) { %>
+    <p>No images found</p>
+    <% } else if (images.length> 0) { %>
     <div class="images-container scrollable-container">
       <h3 class="title"><i data-lucide="images"></i> Images (<%= images.length %>)</h3>
       <div class="images-wrapper">
